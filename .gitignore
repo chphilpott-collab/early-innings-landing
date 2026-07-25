@@ -1,0 +1,4 @@
+Node modules and OS files
+.DS_Store
+node_modules/
+.env

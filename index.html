@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Innings — Video Coaching for Youth Baseball</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #fefdfb;
+        }
+
+        /* TYPOGRAPHY */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #000000;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .subheadline {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #0d9488;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover {
+            background-color: #0f766e;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: #2c3e50;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1a252f;
+            box-shadow: 0 8px 16px rgba(44, 62, 80, 0.2);
+        }
+
+        /* LAYOUT */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 8rem 0;
+            background-color: #fefdfb;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            font-size: 3.25rem;
+            color: #000000;
+        }
+
+        .hero .subheadline {
+            margin-bottom: 2.5rem;
+            color: #4b5563;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* PLACEHOLDER IMAGE */
+        .image-placeholder {
+            background-color: #e5e7eb;
+            border: 2px dashed #9ca3af;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .image-placeholder.hero-bg {
+            height: 400px;
+            width: 100%;
+        }
+
+        .image-placeholder.about-photo {
+            height: 300px;
+            width: 100%;
+        }
+
+        /* WHO THIS IS FOR */
+        .who-for {
+            background-color: #f0fdf9;
+            padding: 5rem 0;
+        }
+
+        .who-for-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .who-for-list li {
+            list-style: none;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .who-for-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0d9488;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        /* ABOUT COACH COLE */
+        .about-coach {
+            background-color: #fefdfb;
+            padding: 5rem 0;
+        }
+
+        .about-coach-intro {
+            margin-bottom: 3rem;
+            max-width: 800px;
+        }
+
+        .about-coach-intro p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .coach-credentials {
+            background-color: #f9f8f6;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #0d9488;
+            margin-bottom: 3rem;
+        }
+
+        .coach-credentials ul {
+            list-style: none;
+            margin: 0;
+        }
+
+        .coach-credentials li {
+            padding: 0.75rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .coach-credentials li:not(:last-child) {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .coach-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        /* PRICING SECTION */
+        .pricing {
+            background-color: #fefdfb;
+            padding: 6rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background-color: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: #0d9488;
+            box-shadow: 0 12px 24px rgba(13, 148, 136, 0.1);
+        }
+
+        .pricing-card.elite {
+            border-color: #0d9488;
+            background-color: #f0fdf9;
+            transform: scale(1.02);
+        }
+
+        .pricing-card.elite:hover {
+            box-shadow: 0 12px 32px rgba(13, 148, 136, 0.2);
+        }
+
+        .pricing-tier-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-tier-desc {
+            font-size: 0.95rem;
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0d9488;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-features strong {
+            display: block;
+            color: #000000;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-cta {
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .pricing-note {
+            font-size: 0.85rem;
+            color: #4b5563;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+            line-height: 1.6;
+        }
+
+        /* HOW IT WORKS */
+        .how-it-works {
+            background-color: #f0fdf9;
+            padding: 5rem 0;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #0d9488;
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0d9488;
+            margin-bottom: 0.5rem;
+        }
+
+        .step h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* FAQ */
+        .faq {
+            background-color: #f0fdf9;
+            padding: 5rem 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background-color: #ffffff;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            background-color: #ffffff;
+            border: none;
+            width: 100%;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .faq-question:hover {
+            background-color: #f9f8f6;
+            color: #0d9488;
+        }
+
+        .faq-question.active {
+            background-color: #f0fdf9;
+            color: #0d9488;
+        }
+
+        .faq-toggle {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: #fefdfb;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* FINAL CTA */
+        .final-cta {
+            background-color: #fefdfb;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta-note {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-top: 1.5rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #2c3e50;
+            color: #ffffff;
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        footer a {
+            color: #0d9488;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .disclaimer {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #a0aec0;
+            line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .subheadline {
+                font-size: 1.1rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                padding: 5rem 0;
+            }
+
+            .who-for-list {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card.elite {
+                transform: scale(1);
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .coach-photos {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .final-cta-buttons {
+                flex-direction: column;
+            }
+
+            .final-cta-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="image-placeholder hero-bg" style="position: absolute; top: 0; left: 0; right: 0; width: 100%; height: 100%; z-index: 0;">
+            <!-- PLACEHOLDER: Hero background image (action shot of Coach Cole playing or coaching). Replace this div's background-image URL once photo is uploaded. -->
+        </div>
+        <div class="container" style="position: relative; z-index: 2;">
+            <div class="hero-content">
+                <h1>Personalized Video Coaching for Youth Baseball</h1>
+                <p class="subheadline">Get consistent, personalized feedback from a real coach. No driving required. No hourly lesson rates. Just better reps.</p>
+                <div class="hero-buttons">
+                    <a href="https://buy.stripe.com/fZu28q6VAe8D8V8euS4Ja00?promotion_code=LAUNCH50" class="btn">Get Started. 50% Off First Month.</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHO THIS IS FOR -->
+    <section class="who-for">
+        <div class="container">
+            <h2>Who This Is For</h2>
+            <ul class="who-for-list">
+                <li><strong>Any youth player</strong>, from kids just starting out through pre-high-school travel ball</li>
+                <li><strong>Parents</strong> who want pro-level coaching without adding another car ride to the schedule</li>
+                <li><strong>Players developing at their own pace</strong> who need consistent feedback between team practices or private lessons</li>
+                <li><strong>High school players</strong> building skills for the next level are welcome too</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ABOUT COACH COLE -->
+    <section class="about-coach">
+        <div class="container">
+            <h2>About Coach Cole</h2>
+            
+            <div class="about-coach-intro">
+                <p>I played 4 years of high school baseball at Bethesda Chevy Chase, then 4 more years of college ball. I've developed multiple athletes into standout players. I coach Little League and travel tournament teams, and I run private lessons.</p>
+                
+                <p>But here's the real story. I was undersized as a player. I know firsthand that kids develop at different rates. Team practices push forward the already-best players and leave everyone else behind. That's what I'm here to fix.</p>
+                
+                <p>I started Early Innings because every kid deserves access to professional-level coaching, not just the ones whose families can afford unlimited private lesson hours or who are already the most talented. My goal is to be the most affordable and accessible private baseball coach available. Personalized development shouldn't be limited to families with the most time or money.</p>
+            </div>
+
+            <div class="coach-credentials">
+                <ul>
+                    <li><strong>4 years high school baseball</strong> at Bethesda Chevy Chase High School</li>
+                    <li><strong>4 years college baseball</strong></li>
+                    <li><strong>Led MCLL all-star team to district championship</strong> as head coach</li>
+                    <li><strong>Currently coaching</strong> Little League and travel tournament teams</li>
+                    <li><strong>Private lesson instructor</strong> with 40+ active clients</li>
+                    <li><strong>Developed multiple athletes</strong> into standout players</li>
+                </ul>
+            </div>
+
+            <div class="coach-photos">
+                <div class="image-placeholder about-photo">
+                    <!-- PLACEHOLDER: About section photo 1 (Coach Cole playing or coaching). Replace with actual image URL. -->
+                </div>
+                <div class="image-placeholder about-photo">
+                    <!-- PLACEHOLDER: About section photo 2 (Coach Cole playing or coaching). Replace with actual image URL. -->
+                </div>
+                <div class="image-placeholder about-photo">
+                    <!-- PLACEHOLDER: About section photo 3 (Coach Cole playing or coaching). Replace with actual image URL. -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing">
+        <div class="container">
+            <h2>Two Simple Tiers</h2>
+            
+            <div class="pricing-grid">
+                <!-- CORE -->
+                <div class="pricing-card">
+                    <div class="pricing-tier-name">Core</div>
+                    <div class="pricing-tier-desc">Best for consistent feedback</div>
+                    <div class="pricing-price">$147<span style="font-size: 0.6em; color: #4b5563;">/mo</span></div>
+                    
+                    <ul class="pricing-features">
+                        <li><strong>1 video review per week</strong><br><span style="font-weight: normal; color: #4b5563;">Hitting, pitching, catching, defense, speed work. Your choice.</span></li>
+                        <li><strong>48-hour turnaround</strong><br><span style="font-weight: normal; color: #4b5563;">On every submission</span></li>
+                        <li><strong>Personalized training plan</strong><br><span style="font-weight: normal; color: #4b5563;">Built around what you're actually working on</span></li>
+                        <li><strong>Drill library access</strong><br><span style="font-weight: normal; color: #4b5563;">Full collection of drills inside Onform</span></li>
+                        <li><strong>Direct messenger access</strong><br><span style="font-weight: normal; color: #4b5563;">Quick questions between reviews</span></li>
+                    </ul>
+                    
+                    <a href="https://buy.stripe.com/fZu28q6VAe8D8V8euS4Ja00?promotion_code=LAUNCH50" class="btn pricing-cta">Start Core</a>
+                </div>
+
+                <!-- ELITE -->
+                <div class="pricing-card elite">
+                    <div class="pricing-tier-name">Elite</div>
+                    <div class="pricing-tier-desc">For players chasing a specific goal</div>
+                    <div class="pricing-price">$247<span style="font-size: 0.6em; color: #0d9488;">/mo</span></div>
+                    
+                    <ul class="pricing-features">
+                        <li><strong>2 video reviews per week</strong><br><span style="font-weight: normal; color: #4b5563;">Weekly cadence, twice the feedback</span></li>
+                        <li><strong>Weekly live video call</strong><br><span style="font-weight: normal; color: #4b5563;">5 minutes of direct coaching each week</span></li>
+                        <li><strong>24-hour turnaround</strong><br><span style="font-weight: normal; color: #4b5563;">Priority feedback on every video</span></li>
+                        <li><strong>Weekly training video</strong><br><span style="font-weight: normal; color: #4b5563;">Coach Cole demonstrates your specific drills and corrections</span></li>
+                        <li><strong>Everything in Core</strong><br><span style="font-weight: normal; color: #4b5563;">Full drill library, personalized plan, direct access</span></li>
+                    </ul>
+                    
+                    <a href="https://buy.stripe.com/7sYdR82Fke8D8V83Qe4Ja01?promotion_code=LAUNCH50" class="btn pricing-cta">Start Elite</a>
+                </div>
+            </div>
+
+            <div class="pricing-note">
+                <strong>Month to month billing.</strong> Cancel anytime, no long-term commitment. You can pause once per 12 months for injury or season break. No questions asked.
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Sign Up</h3>
+                    <p>Pick your tier. You'll get an instant email with your Onform invite and a 2-minute tutorial on how to film.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Film & Send</h3>
+                    <p>Send videos whenever you want feedback. Phone video is fine. Side view and front view work best. Film in the cage, field, or garage.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Better</h3>
+                    <p>You get voiceover analysis with telestration, your updated training plan, and 2 to 3 specific cues to work on.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Questions</h2>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What ages and skill levels is this for?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Any youth player, from kids just starting out through pre-high-school travel ball. There is no minimum skill level. The drills and language are adjusted to the player, not the other way around.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What does this cover, just hitting and pitching?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No. This covers hitting, pitching, catching, defense, and speed and agility work. Whatever is actually holding your player back is fair game.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How is this different from an in-person private lesson?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>It is not a replacement for hands-on reps. It is a way to get consistent, personalized feedback between lessons or on weeks you cannot make it in, at a fraction of the hourly cost.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What if my kid does not know what to work on?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>That is exactly what the video review figures out. You send what you have got, the feedback tells you where to focus.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What equipment do we need?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Just a phone that shoots decent video. No radar gun, no special gear required.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is this a contract, or can we cancel anytime?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Month to month, cancel anytime, no long-term commitment.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can we switch tiers later?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, anytime. The change takes effect the next billing cycle.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What if the video we send is not great quality?</span>
+                        <span class="faq-toggle">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You will get told exactly how to refilm it. No charge for a re-send.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>First 10 Spots at 50% Off</h2>
+            <p style="color: #0d9488; font-size: 1.25rem; font-weight: 600; margin-bottom: 2rem;">7 Remaining</p>
+            
+            <div class="final-cta-buttons">
+                <a href="https://buy.stripe.com/fZu28q6VAe8D8V8euS4Ja00?promotion_code=LAUNCH50" class="btn">Claim a Spot. Core $73.50/mo</a>
+                <a href="https://buy.stripe.com/7sYdR82Fke8D8V83Qe4Ja01?promotion_code=LAUNCH50" class="btn">Claim a Spot. Elite $123.50/mo</a>
+            </div>
+            
+            <p class="final-cta-note">Spots update manually. When it hits 0, the discount ends.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p><strong>Questions?</strong> Text/Call: 240-507-6816 | <a href="mailto:coach@earlyinning.training">coach@earlyinning.training</a></p>
+            <!-- HTML comment: Email placeholder. Replace coach@earlyinning.training with actual domain email once domain is finalized. -->
+            <p style="margin-top: 1rem;"><strong>Coach Cole</strong></p>
+            <div class="disclaimer">
+                <p>This is a coaching service, not a medical or strength-training program. Consult your physician before beginning any new training regimen.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const isActive = button.classList.contains('active');
+            
+            // Close all open FAQs
+            document.querySelectorAll('.faq-question').forEach(q => {
+                q.classList.remove('active');
+                q.nextElementSibling.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it was not open
+            if (!isActive) {
+                button.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
