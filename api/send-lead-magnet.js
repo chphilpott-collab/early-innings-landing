@@ -32,6 +32,7 @@ module.exports = async (req, res) => {
   }
 
   if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
+    console.error('Missing env vars: SMTP_USER=' + !!process.env.SMTP_USER + ', SMTP_PASSWORD=' + !!process.env.SMTP_PASSWORD);
     res.status(200).json({ ok: false, message: 'Something is misconfigured on our end — email coach@earlyinnings.training directly for now.' });
     return;
   }
@@ -39,9 +40,21 @@ module.exports = async (req, res) => {
   try {
     const proto = req.headers['x-forwarded-proto'] || 'https';
     const pdfUrl = `${proto}://${req.headers.host}/five-things-i-check-first.pdf`;
-    const pdfResp = await fetch(pdfUrl);
-    if (!pdfResp.ok) throw new Error('PDF not found at ' + pdfUrl);
-    const pdfBuffer = Buffer.from(await pdfResp.arrayBuffer());
+    console.log('Fetching PDF from:', pdfUrl);
+    
+    // Use https module for Node.js compatibility
+    const https = require('https');
+    const pdfBuffer = await new Promise((resolve, reject) => {
+      https.get(pdfUrl, (resp) => {
+        if (resp.statusCode !== 200) {
+          reject(new Error(`PDF fetch failed: ${resp.statusCode}`));
+          return;
+        }
+        const chunks = [];
+        resp.on('data', chunk => chunks.push(chunk));
+        resp.on('end', () => resolve(Buffer.concat(chunks)));
+      }).on('error', reject);
+    });
 
     const transporter = nodemailer.createTransport({
       host: SMTP_HOST,
