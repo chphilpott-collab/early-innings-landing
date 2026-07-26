@@ -1,0 +1,20 @@
+{
+  "name": "early-innings-landing",
+  "version": "1.0.0",
+  "description": "Early Innings - Async video coaching for youth baseball",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "baseball",
+    "coaching",
+    "video-analysis"
+  ],
+  "author": "Coach Cole",
+  "license": "MIT",
+  "dependencies": {
+    "nodemailer": "^9.0.3"
+  }
+}
