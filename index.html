@@ -739,9 +739,27 @@ document.getElementById('leadbtn').addEventListener('click', function(){
     document.getElementById('lead').placeholder = 'Enter a valid email';
     return;
   }
-  document.getElementById('leadok').style.display = 'block';
-  document.getElementById('lead').value = '';
-  this.textContent = 'Sent';
+  var btn = this;
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+  var website = document.querySelector('input[name="website"]').value;
+  fetch('/api/send-lead-magnet', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({email: v, website: website})
+  }).then(function(r){
+    if(r.ok) return r.json();
+    throw new Error('API error: ' + r.status);
+  }).then(function(data){
+    document.getElementById('leadok').style.display = 'block';
+    document.getElementById('lead').value = '';
+    btn.textContent = 'Sent';
+  }).catch(function(err){
+    console.error(err);
+    btn.textContent = 'Error. Try again.';
+    btn.disabled = false;
+    document.getElementById('lead').style.borderColor = '#C9A227';
+  });
 });
 </script>
 </body>
