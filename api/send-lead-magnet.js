@@ -31,11 +31,8 @@ module.exports = async (req, res) => {
     return;
   }
 
-  if (!process.env.SMTP_USER || !process.env.SMTP_PASSWORD) {
-    console.error('Missing env vars: SMTP_USER=' + !!process.env.SMTP_USER + ', SMTP_PASSWORD=' + !!process.env.SMTP_PASSWORD);
-    res.status(200).json({ ok: false, message: 'Something is misconfigured on our end — email coach@earlyinnings.training directly for now.' });
-    return;
-  }
+  const SMTP_USER = 'coach@earlyinnings.training';
+  const SMTP_PASSWORD = '1SSP23ael93!';
 
   try {
     const proto = req.headers['x-forwarded-proto'] || 'https';
@@ -61,8 +58,8 @@ module.exports = async (req, res) => {
       port: SMTP_PORT,
       secure: SMTP_SECURE,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
+        user: SMTP_USER,
+        pass: SMTP_PASSWORD,
       },
       connectionTimeout: 10000,
       greetingTimeout: 10000,
@@ -70,9 +67,9 @@ module.exports = async (req, res) => {
     });
 
     await transporter.sendMail({
-      from: `"Coach Cole - Early Innings" <${process.env.SMTP_USER}>`,
+      from: `"Coach Cole - Early Innings" <${SMTP_USER}>`,
       to: email,
-      replyTo: process.env.SMTP_USER,
+      replyTo: SMTP_USER,
       subject: 'The 5 things I check first on any swing',
       html: `
         <div style="font-family:Georgia,serif;font-size:16px;color:#111;line-height:1.6;max-width:520px">
