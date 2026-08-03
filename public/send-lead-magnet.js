@@ -105,19 +105,27 @@ module.exports = async (req, res) => {
     // Log the signup back to yourself so you've got a running list to
     // work from. Non-blocking: if this fails, the visitor still gets
     // their PDF and a normal success response, the error just shows up
-    // in the Vercel function logs.
+    // in the Vercel function logs (search for "signup log email failed").
     try {
       const when = new Date().toLocaleString('en-US', {
         timeZone: 'America/New_York',
         dateStyle: 'medium',
         timeStyle: 'short',
       });
-      await transporter.sendMail({
+      const notifyResult = await transporter.sendMail({
         from: `"Early Innings Signups" <${SMTP_USER}>`,
-        to: SMTP_USER,
+        to: 'chphilpott@gmail.com',
+        replyTo: email,
         subject: `New PDF signup: ${email}`,
-        text: `${email}\n${when} ET\n\nAdd to your follow-up list.`,
+        html: `
+          <div style="font-family:Georgia,serif;font-size:15px;color:#111;line-height:1.6;max-width:480px">
+            <p style="margin:0 0 12px">New signup for the free swing checklist:</p>
+            <p style="margin:0 0 12px;font-size:17px"><strong>${email}</strong></p>
+            <p style="margin:0;color:#666;font-size:13px">${when} ET</p>
+          </div>`,
+        text: `New signup for the free swing checklist:\n${email}\n${when} ET`,
       });
+      console.log('signup log email sent, messageId:', notifyResult.messageId);
     } catch (logErr) {
       console.error('signup log email failed (non-blocking):', logErr);
     }
