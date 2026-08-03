@@ -5,8 +5,8 @@
 // Namecheap Private Email mailbox. No third-party email service,
 // no monthly fee. Runs free on Vercel's free tier.
 //
-// Also logs every signup back to coach@earlyinnings.training so you've
-// got a running list of who to follow up with.
+// Also logs every signup to a separate inbox so you've got a running
+// list of who to follow up with.
 //
 // Requires SMTP_USER and SMTP_PASSWORD to be set as environment
 // variables in your Vercel project (Settings -> Environment Variables).
@@ -102,10 +102,10 @@ module.exports = async (req, res) => {
       ],
     });
 
-    // Log the signup back to yourself so you've got a running list to
-    // work from. Non-blocking: if this fails, the visitor still gets
-    // their PDF and a normal success response, the error just shows up
-    // in the Vercel function logs (search for "signup log email failed").
+    // Log the signup to a separate inbox so you've got a running list to
+    // work from. Sent to a different address than SMTP_USER on purpose,
+    // self-to-self mail on the same mailbox tends to get silently dropped.
+    // Non-blocking: if this fails, the visitor still gets their PDF.
     try {
       const when = new Date().toLocaleString('en-US', {
         timeZone: 'America/New_York',
@@ -114,7 +114,7 @@ module.exports = async (req, res) => {
       });
       const notifyResult = await transporter.sendMail({
         from: `"Early Innings Signups" <${SMTP_USER}>`,
-        to: SMTP_USER,
+        to: 'chphilpott@gmail.com',
         replyTo: email,
         subject: `New PDF signup: ${email}`,
         html: `
